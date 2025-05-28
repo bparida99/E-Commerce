@@ -20,20 +20,17 @@ public class LoggingAspect {
         String methodName = proceedingJoinPoint.getSignature().getName();
         String signature = className + "." + methodName;
         String timestamp = DateTimeFormatter.ISO_INSTANT.format(Instant.now());
-
-
         long start = System.currentTimeMillis();
-        log.info("➡️ [{}] | Entering {}()", timestamp, signature);
-
+        log.info("Entering {}()", signature);
         try {
             Object result = proceedingJoinPoint.proceed();
             long duration = System.currentTimeMillis() - start;
-            log.info("➡️ [{}] | Exiting {}() | Duration={}ms", timestamp, signature, duration);
+            log.info("Exiting {}() | Duration={}ms", signature, duration);
             return result;
         } catch (Throwable ex) {
             long duration = System.currentTimeMillis() - start;
-            log.error("➡️ [{}] | Exception in {}() | Duration={}ms | Message: {}",
-                    timestamp, signature, duration, ex.getMessage(), ex);
+            log.error("Exception in {}() | Duration={}ms | Message: {}",
+                    signature, duration, ex.getMessage(), ex);
             throw ex;
         }
     }

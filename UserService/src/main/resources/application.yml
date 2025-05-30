@@ -24,5 +24,7 @@ logging:
   pattern:
     correlation: "[${spring.application.name:},traceId: %X{traceId:-},spanId: %X{spanId:-}] "
   include-application-name: false
+  file:
+    name: D:/workspace/E-Commerce/Log/user-service.log
 
 

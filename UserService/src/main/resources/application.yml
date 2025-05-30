@@ -14,5 +14,15 @@ spring:
     hibernate:
       ddl-auto: update
 
+management:
+  tracing:
+    endpoint: http://localhost:9411/api/v2/spans
+    sampling:
+      probability: 1.0
+
+logging:
+  pattern:
+    correlation: "[${spring.application.name:},traceId: %X{traceId:-},spanId: %X{spanId:-}] "
+  include-application-name: false
 
 
